@@ -16,8 +16,53 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: 
   
   const db = client.db(databaseName);
 
-  db.collection('users').insertOne({
+  db.collection('tasks').insertMany([
+    {
+      description: 'Empty Dishwasher', 
+      completed: false
+  },
+  {
+    description: 'Load Dishwasher', 
+      completed: false
+  },
+  {
+    description: 'Sweep Floors', 
+      completed: true
+  }
+], (error, result) => {
+  if (error) {
+    return console.log('The following error has occured!' + error);
+  }
+  console.log(result.ops);
+});
+
+  /* db.collection('users').insertOne({
     name: 'Rachel',
     age: 26
-  })
+  }, (error, result) => {
+    if (error) {
+      return console.log('Unable to insert user');
+    } 
+
+    console.log(result.ops);
+
+  }) */
+  
+  /* db.collection('users').insertMany([
+    {
+      name: 'Jen',
+      age: 28
+    },
+    {
+      name: 'Gunther',
+      age: 27
+    }
+  ], (error, result) => {
+    if (error) {
+      return console.log('This is an error!');
+    }
+    console.log(result.ops);
+  }) */
+
+
 });
